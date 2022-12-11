@@ -1,0 +1,6 @@
+class ElementNotFound(Exception):
+    ...
+
+
+class PageNotFound(ElementNotFound):
+    ...
