@@ -14,19 +14,13 @@ class WebSocketBackend(PyfronBackend):
         async with websockets.serve(self.handler, "", port): 
             print(f"started websocket server at: {port}") 
             await asyncio.Future()
-
+    
+    async def getWebsocketMessage(self, websocket) -> dict: 
+        message = await websocket.recv()
+        return json.loads(message) 
 
     async def handler(self, websocket): 
-        # each handler corresponds to one user 
-        while True: 
-            # first message that we receive is the user location (pageId) 
-            # so we can send this socket to the correct page handler!
-            message = await websocket.recv()
-            event = json.loads(message)
-            if event["type"] == "locationUpdate":
-                pageId = event["pageId"]
-                # handler should be an async function that accepts the websocket !
-                handler, args = self.pyfron.getWebsocketHandler(pageId) 
-                await handler(websocket, *args) 
-                break
+        # first message that we receive is the user location (pageId) 
+        # so we can send this socket to the correct page handler!
+        await self.pyfron.handleWebsocketConnection(websocket) 
 

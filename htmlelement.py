@@ -131,6 +131,14 @@ class HTMLElement(object):
         parent: HTMLElement = parentClass(**rawElem)
         parent.childrens = [HTMLElement.fromDict(ch) for ch in childrens]
         return parent
+    
+    def prepare(self, remoteState: Optional[dict] = None): 
+        """
+        Prepare the page object before handling an event.
+        """
+        if remoteState: 
+            self.updateFromState(remoteState) 
+        self.updateElemId()
 
     def updateFromState(self, state: dict):
         """

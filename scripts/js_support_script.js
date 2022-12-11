@@ -83,7 +83,7 @@ function onSubmitListener(event) {
 function receiveWebsocketMessages(websocket) { 
     websocket.addEventListener("message", ({data}) => {
         const parsed = JSON.parse(data) 
-        page_props = data.state;
+        page_props = parsed.state;
         updatePageFromChanges(parsed.changes);  
     })
 } 
