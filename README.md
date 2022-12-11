@@ -2,7 +2,8 @@
 Python ssr frontend framework with bateries included.
 
 
-`from pyfron.htmlelement import HTMLElement, Page, H1, P, Div
+```
+from pyfron.htmlelement import HTMLElement, Page, H1, P, Div
 from pyfron.base import Pyfron
 import asyncio
 
@@ -33,4 +34,5 @@ webSocketTestPage = Page(
             ]
         ) 
     ]
-) `
+) 
+```
